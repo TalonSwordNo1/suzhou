@@ -1,21 +1,30 @@
 
-const pete = {
-	name: 'Pete',
-	sayHi: function(day) {
-		console.log('This is', this.name, 'Today is', day);
+
+const megaPrototype = {
+	ping: function() {
+		console.log('PING');
 	}
 };
 
-const jack = {
-	name: 'Jack'
+const personPrototype = Object.create(megaPrototype);
+
+personPrototype.name = 'I AM PROTOTYPE';
+personPrototype.sayHi = function(day) {
+	console.log('This is', this.name, 'Today is', day);
 }
 
-const hi = pete.sayHi;
+function createPerson(name, age) {
+	const person = Object.create(personPrototype);
 
-// hi.call(jack, 'Monday');
-// hi.apply(jack, ['Monday']);
+	person.name = name;
+	person.age = age;
 
+	return person;
+}
 
-const hiBoundToPete = hi.bind(pete);
+const pete = createPerson('Pete', 27);
+const jon = createPerson('Jon', 32);
 
-hiBoundToPete('Tuesday');
+pete.sayHi('tuesday');
+pete.ping();
+jon.sayHi('wednesday');
