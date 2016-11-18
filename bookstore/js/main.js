@@ -10,9 +10,15 @@ function addBook(parent, book) {
 	const li = document.createElement('li');
 	li.innerHTML = book.title;
 
+	const deleteButton = document.createElement('a');
+	deleteButton.href = '#';
+	deleteButton.innerHTML = '[del]';
+
 	if (book.marked) {
 		li.classList.add('marked');
 	}
+
+	li.appendChild(deleteButton);
 
 	parent.appendChild(li);
 }
